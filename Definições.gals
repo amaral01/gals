@@ -1,0 +1,35 @@
+#Options
+GenerateScanner = true
+GenerateParser = true
+Language = Java
+ScannerName = Lexico
+ParserName = Sintatico
+SemanticName = Semantico
+ScannerCaseSensitive = true
+ScannerTable = Full
+Input = Stream
+Parser = SLR
+#RegularDefinitions
+L:[a-zA-Z]
+D:[0-9]
+#Tokens
+"+"
+"-"
+"*"
+"/"
+"("
+")"
+":="
+ID:{L}({L}|{D})*
+NUM:{D}+
+
+#NonTerminals
+<ATRIB>
+<EXP>
+<OP>
+#Grammar
+<ATRIB> ::= ID ":="<EXP>;
+<EXP> ::= <EXP> <OP> <EXP>
+	|"("<EXP>")"
+	|ID|NUM;
+<OP>::="+"|"-"|"*"|"/";
